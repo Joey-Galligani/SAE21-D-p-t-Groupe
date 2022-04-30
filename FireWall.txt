@@ -1,0 +1,8 @@
+/ip firewall filter
+add action=accept chain=forward connection-state=etablished, related in-interface=ether1
+add action=accept chain=forward connection-state=etablished, related, new in-interface=ether2
+add action=accept chain=forward connection-nat-state=dstnat in-interface=ether1
+add action=drop chain=forward
+add action=accept chain=input in-interface=ether2 protocol=icmp
+add action=accept chain=input dst-port=22 protocol=tcp src-adresse=10.1.0.254
+add action=drop chain=input
